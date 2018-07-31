@@ -1,0 +1,19 @@
+{
+  "name": "webdev-server-node-annienero",
+  "version": "1.0.0",
+  "description": "Node server for Course Manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/annienero/webdev-server-node-annienero.git"
+  },
+  "author": "Annie Nero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/annienero/webdev-server-node-annienero/issues"
+  },
+  "homepage": "https://github.com/annienero/webdev-server-node-annienero#readme"
+}
