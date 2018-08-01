@@ -1,18 +1,11 @@
 module.exports = function (app) {
     app.post('/api/login', login);
-    app.post('/api/register', register);
     app.post('/api/logout', logout);
     app.get('/api/profile', getCurrentUser);
+    app.post('/api/user', register);
     app.get('/api/user', function(req, res) {
         userModel.findAllUsers()
             .then(response => res.send(response))
-    })
-    app.post('/api/user', function(req, res) {
-        var user = req.body
-        userModel.createUser(user)
-            .then(function (user) {
-                res.send(user)
-            })
     })
 }
 
@@ -30,13 +23,14 @@ function register(req, res) {
                     username: username,
                     password: password
                 }
-                return userModel
-                    .createUser(newUser)
+                return userModel.createUser(newUser)
+                    .then(function (user) {
+                        req.session['currentUser'] = user
+                        res.send(user)
+                    })
+            } else {
+                res.send(); //TODO how to send bad
             }
-        })
-        .then(function (user) {
-            req.session['currentUser'] = user;
-            res.send(user);
         })
 }
 
@@ -51,7 +45,7 @@ function login(req, res) {
                 req.session['currentUser'] = user;
                 res.send(user);
             } else {
-                res.send(0);
+                res.send(0); //TODO how to send bad
             }
         });
 
@@ -63,7 +57,5 @@ function logout(req, res) {
 }
 
 function getCurrentUser(req, res) {
-    var user = req.params['user']
-    var value = req.session[user]
-    res.send(value)
+    res.send(req.session['currentUser'])
 }
