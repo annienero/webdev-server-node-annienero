@@ -7,6 +7,13 @@ module.exports = function (app) {
         userModel.findAllUsers()
             .then(response => res.send(response))
     })
+    app.post('/api/user', function(req, res) {
+        var user = req.body
+        userModel.createUser(user)
+            .then(function (user) {
+                res.send(user)
+            })
+    })
 }
 
 var userModel = require('../models/user/user.model.server');
