@@ -8,7 +8,7 @@ function findAllUsers() {
 }
 
 function findUserById(userId) {
-    return userModel.findById(userId)
+    return userModel.find({_id: userId})
 }
 
 function findUserByUsername(username) {

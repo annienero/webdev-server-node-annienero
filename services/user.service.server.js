@@ -3,6 +3,7 @@ module.exports = function (app) {
     app.post('/api/logout', logout);
     app.get('/api/profile', getCurrentUser);
     app.post('/api/user', register);
+    app.get('/api/user/:userId', findUserById);
     app.get('/api/user', function(req, res) {
         userModel.findAllUsers()
             .then(response => res.send(response))
@@ -10,6 +11,14 @@ module.exports = function (app) {
 }
 
 var userModel = require('../models/user/user.model.server');
+
+function findUserById(req, res) {
+    var id = req.params['userId']
+    userModel.findUserById(id)
+        .then(function(user) {
+            res.json(user)
+    })
+}
 
 function register(req, res) {
     var username = req.body.username;
@@ -57,5 +66,6 @@ function logout(req, res) {
 }
 
 function getCurrentUser(req, res) {
-    res.send(req.session['currentUser'])
+    currentUser = req.session['currentUser'].data
+    res.send(currentUser)
 }
