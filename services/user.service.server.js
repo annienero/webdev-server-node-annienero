@@ -36,7 +36,7 @@ function register(req, res) {
                 }
                 return userModel.createUser(newUser)
                     .then(function (user) {
-                        req.session['currentUser'] = user
+                        req.session['currentUser'] = user._id
                         res.send(user)
                     })
             } else {
@@ -53,7 +53,7 @@ function login(req, res) {
         .findUserByCredentials(username, password)
         .then(function (user) {
             if (user) {
-                req.session['currentUser'] = user;
+                req.session['currentUser'] = user._id;
                 res.send(user);
             } else {
                 res.sendStatus(403);
@@ -67,16 +67,22 @@ function logout(req, res) {
 }
 
 function getCurrentUser(req, res) {
-    res.send(req.session['currentUser'])
+    userModel.findUserById(req.session['currentUser'])
+        .then(function (user) {
+            res.send(user)
+        })
 }
 
 function updateCurrentUser(req, res) {
-    let id = req.session['currentUser']._id
-    userModel.updateUser(id, req.body)
-    req.session['currentUser'] = userModel.findUserById(id)
-    res.send(req.session['currentUser'])
+    userModel.updateUser(req.session['currentUser'], req.body)
+        .then(function (user) {
+                res.send(200)
+            },
+            function (user) {
+                res.send(500)
+            })
 }
 
 function deleteCurrentUser(req, res) {
-    res.send(req.session['currentUser'])
+//TODO
 }

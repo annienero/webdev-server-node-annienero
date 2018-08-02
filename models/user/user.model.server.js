@@ -8,7 +8,7 @@ function findAllUsers() {
 }
 
 function findUserById(userId) {
-    return userModel.findOne({_id: userId})
+    return userModel.findOne({_id: userId});
 }
 
 function findUserByUsername(username) {
@@ -29,7 +29,7 @@ function deleteUser(userId) {
 
 function updateUser(userId, newUser) {
     return userModel.update({_id: userId},
-        {$set: newUser})
+        {$set: newUser}, {upsert: true})
 }
 
 module.exports = {
