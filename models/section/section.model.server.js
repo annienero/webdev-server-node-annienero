@@ -15,8 +15,19 @@ function deleteSection(sectionId){
     return sectionModel.findByIdAndDelete(sectionId)
 }
 
+function findSectionById(sectionId){
+    return sectionModel.findOne({_id: sectionId})
+}
+
+function updateSection(sectionId, newSection) {
+    return sectionModel.update({_id: sectionId},
+        {$set: newSection}, {upsert: true})
+}
+
 module.exports = {
     createSection: createSection,
     findAllSectionsForCourse: findAllSectionsForCourse,
-    deleteSection: deleteSection
+    deleteSection: deleteSection,
+    findSectionById: findSectionById,
+    updateSection: updateSection
 }

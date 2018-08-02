@@ -2,7 +2,7 @@ module.exports = function (app) {
     app.post('/api/login', login);
     app.post('/api/logout', logout);
     app.get('/api/profile', getCurrentUser);
-    app.post('/api/profile', updateCurrentUser);
+    app.put('/api/profile', updateCurrentUser);
     app.delete('/api/profile', deleteCurrentUser);
     app.post('/api/user', register);
     app.get('/api/user/:userId', findUserById);
