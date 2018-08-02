@@ -38,7 +38,7 @@ function register(req, res) {
                         res.send(user)
                     })
             } else {
-                res.send(); //TODO how to send bad
+                res.sendStatus(403);
             }
         })
 }
@@ -54,10 +54,9 @@ function login(req, res) {
                 req.session['currentUser'] = user;
                 res.send(user);
             } else {
-                res.send(0); //TODO how to send bad
+                res.sendStatus(403);
             }
         });
-
 }
 
 function logout(req, res) {
@@ -66,6 +65,5 @@ function logout(req, res) {
 }
 
 function getCurrentUser(req, res) {
-    currentUser = req.session['currentUser'].data
-    res.send(currentUser)
+    res.send(req.session['currentUser'])
 }
