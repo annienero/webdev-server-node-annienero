@@ -11,7 +11,12 @@ function findAllSectionsForCourse(courseId){
     return sectionModel.find({courseId: courseId})
 }
 
+function deleteSection(sectionId){
+    return sectionModel.findByIdAndDelete(sectionId)
+}
+
 module.exports = {
     createSection: createSection,
-    findAllSectionsForCourse: findAllSectionsForCourse
+    findAllSectionsForCourse: findAllSectionsForCourse,
+    deleteSection: deleteSection
 }
