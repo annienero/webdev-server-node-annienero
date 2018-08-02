@@ -2,6 +2,8 @@ module.exports = function (app) {
     app.post('/api/login', login);
     app.post('/api/logout', logout);
     app.get('/api/profile', getCurrentUser);
+    app.post('/api/profile', updateCurrentUser);
+    app.delete('/api/profile', deleteCurrentUser);
     app.post('/api/user', register);
     app.get('/api/user/:userId', findUserById);
     app.get('/api/user', function(req, res) {
@@ -65,5 +67,16 @@ function logout(req, res) {
 }
 
 function getCurrentUser(req, res) {
+    res.send(req.session['currentUser'])
+}
+
+function updateCurrentUser(req, res) {
+    let id = req.session['currentUser']._id
+    userModel.updateUser(id, req.body)
+    req.session['currentUser'] = userModel.findUserById(id)
+    res.send(req.session['currentUser'])
+}
+
+function deleteCurrentUser(req, res) {
     res.send(req.session['currentUser'])
 }
