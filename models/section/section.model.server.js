@@ -24,10 +24,30 @@ function updateSection(sectionId, newSection) {
         {$set: newSection}, {upsert: true})
 }
 
+
+function decrementSeats(sectionId) {
+    return sectionModel.update({
+        _id:sectionId
+    }, {
+        $inc: {seats: -1}
+    })
+}
+
+function incrementSeats(sectionId) {
+    return sectionModel.update({
+        _id:sectionId
+    }, {
+        $inc: {seats: +1}
+    })
+}
+
+
 module.exports = {
     createSection: createSection,
     findAllSectionsForCourse: findAllSectionsForCourse,
     deleteSection: deleteSection,
     findSectionById: findSectionById,
-    updateSection: updateSection
+    updateSection: updateSection,
+    decrementSeats: decrementSeats,
+    incrementSeats: incrementSeats
 }

@@ -4,9 +4,11 @@ module.exports = function (app) {
     app.delete('/api/section/:sectionId', deleteSection);
     app.get('/api/section/:sectionId', findSectionById);
     app.put('/api/section/:sectionId', updateSection);
+    app.post('/api/section/:sectionId', enrollStudentInSection);
 }
 
 var sectionModel = require('../models/section/section.model.server');
+var enrollModel = require('../models/enroll/enroll.model.server');
 
 function createSection(req, res) {
     return sectionModel.createSection(req.body)
@@ -41,4 +43,26 @@ function updateSection(req, res) {
 function findSectionById(req, res) {
     sectionModel.findSectionById(req.params['sectionId'])
         .then(function (section) {res.json(section)})
+}
+
+
+function enrollStudentInSection(req, res) {
+    sectionModel.canEnroll(req.params['sectionId'])
+        .then(function (canEnroll) {
+            if (canEnroll) {
+                sectionModel.decrementSeats(req.params['sectionId'])
+                    .then(function () {
+                        enrollModel.enrollStudentInSection(req.params['sectionId'], req.session['currentUser'])
+                            .then(function (enrollment) {
+                                    res.json(enrollment)
+                                },
+                                function (section) {
+                                    res.send(500)
+                                })
+                    })
+            } else {
+                res.send(500)
+            }
+        })
+
 }

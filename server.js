@@ -5,6 +5,7 @@ var session = require('express-session')
 const mongoose = require('mongoose')
 mongoose.connect('mongodb://localhost/webdev')
 app.use(session({
+    maxAge: Date.now() + (30 * 1800000),
     resave: false,
     saveUninitialized: true,
     secret: 'any string'
