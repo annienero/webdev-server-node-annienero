@@ -84,5 +84,5 @@ function updateCurrentUser(req, res) {
 }
 
 function deleteCurrentUser(req, res) {
-//TODO
+    userModel.deleteUser(req.session['currentUser'])
 }
