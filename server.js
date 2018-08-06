@@ -3,7 +3,11 @@ var app = express()
 var bodyParser = require('body-parser')
 var session = require('express-session')
 const mongoose = require('mongoose')
-mongoose.connect('mongodb://localhost/webdev')
+
+mongoose.connect('mongodb://root123:root123@ds215172.mlab.com:15172/heroku_12hvbf81')
+
+
+// mongoose.connect('mongodb://localhost/webdev')
 app.use(session({
     maxAge: Date.now() + (30 * 1800000),
     resave: false,
