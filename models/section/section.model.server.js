@@ -41,6 +41,11 @@ function incrementSeats(sectionId) {
     })
 }
 
+function canEnroll(sectionId) {
+    return sectionModel.findOne({_id: sectionId})
+        .then((section) => { return section.seats > 0 })
+}
+
 module.exports = {
     createSection: createSection,
     findAllSectionsForCourse: findAllSectionsForCourse,
@@ -48,5 +53,6 @@ module.exports = {
     findSectionById: findSectionById,
     updateSection: updateSection,
     decrementSeats: decrementSeats,
-    incrementSeats: incrementSeats
+    incrementSeats: incrementSeats,
+    canEnroll: canEnroll
 }
