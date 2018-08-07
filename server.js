@@ -6,8 +6,6 @@ const mongoose = require('mongoose')
 
 mongoose.connect('mongodb://root123:root123@ds215172.mlab.com:15172/heroku_12hvbf81')
 
-
-// mongoose.connect('mongodb://localhost/webdev')
 app.use(session({
     maxAge: Date.now() + (30 * 1800000),
     resave: false,
@@ -20,14 +18,12 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200") //TODO local
+    res.header("Access-Control-Allow-Origin", "https://webdev-angular-client-nero.herokuapp.com")
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
     res.header("Access-Control-Allow-Credentials", "true")
     next()
 })
-
-app.get('/hello', (req, res) => {res.send('hello from heroku')});
 
 var userService = require('./services/user.service.server')
 userService(app)
