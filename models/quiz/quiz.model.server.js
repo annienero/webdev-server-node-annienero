@@ -9,6 +9,8 @@ function findAllQuizzes() {
 
 function findQuizById(quizId) {
     return quizModel.findOne({_id: quizId})
+        .populate('questions')
+        .exec()
 }
 
 module.exports = {
