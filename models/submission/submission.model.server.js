@@ -42,16 +42,16 @@ function createSubmission(quiz, student) {
     return submissionModel.create(submission)
 }
 
-function findSubmissionForStudentById(submissionId, studentId) {
-    return submissionModel.findOne({_id: submissionId, student: studentId})
+function findSubmissions(quizId, studentId) {
+    return submissionModel.find({quiz: quizId, student: studentId})
 }
 
-function findSubmissionsForStudent(studentId) {
-    return submissionModel.findOne({student: studentId})
+function findSubmission(submissionId, studentId) {
+    return submissionModel.findOne({_id: submissionId, student: studentId})
 }
 
 module.exports = {
     createSubmission: createSubmission,
-    findSubmissionForStudentById: findSubmissionForStudentById,
-    findSubmissionsForStudent: findSubmissionsForStudent
+    findSubmissions: findSubmissions,
+    findSubmission: findSubmission
 }
