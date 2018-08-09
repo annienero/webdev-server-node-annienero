@@ -18,7 +18,8 @@ var submissionSchema = mongoose.Schema({
         multipleChoiceAnswer: String,
         essayAnswer: String,
         trueFalseAnswer: Boolean
-    }]
+    }],
+    submissionTime: {type: Date}
 }, {collection: 'submission'})
 
 module.exports = submissionSchema;

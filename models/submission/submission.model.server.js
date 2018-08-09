@@ -36,7 +36,7 @@ function createSubmission(quiz, student) {
     let submission = {
         quiz: quiz,
         student: student,
-        updatedAt: new Date(),
+        submissionTime: new Date(),
         answers: answers
     }
     return submissionModel.create(submission)
