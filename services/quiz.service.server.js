@@ -18,8 +18,7 @@ function findQuizById(req, res) {
 }
 
 function submitQuiz(req, res) {
-    //TODO much parse
-    submissionModel.createSubmission(req.body)
+    submissionModel.createSubmission(req.body, req.session['currentUser'])
     .then(function(submission) { res.json(submission) })
 }
 

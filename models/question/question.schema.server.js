@@ -6,7 +6,7 @@ var questionSchema = mongoose.Schema({
     description: String,
     choices: [{
         text: String,
-        value: String
+        choiceValue: String
     }],
     blanks: [String],
     questionType: {

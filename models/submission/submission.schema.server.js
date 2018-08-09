@@ -14,7 +14,7 @@ var submissionSchema = mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'QuestionModel'
         },
-        fillBlanksAnswers: {variable: String, value: String},
+        fillBlanksAnswers: {variable: String, choiceValue: String},
         multipleChoiceAnswer: String,
         essayAnswer: String,
         trueFalseAnswer: Boolean

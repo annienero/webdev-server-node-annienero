@@ -5,7 +5,8 @@ var quizSchema = mongoose.Schema({
     questions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'QuestionModel'
-    }]
+    }],
+    updatedAt: Date
 }, {collection: 'quiz'})
 
 module.exports = quizSchema;
