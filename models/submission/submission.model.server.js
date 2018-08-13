@@ -9,25 +9,45 @@ function createSubmission(quiz, student) {
         switch(question.questionType) {
             case 'ESSAY':
                 answers.push({
-                    question: question,
+                    title: question.title,
+                    points: question.points,
+                    description: question.description,
+                    choices: question.choices,
+                    blanks: question.blanks,
+                    questionType: question.questionType,
                     essayAnswer: question.essayAnswer
                 })
                 break
             case 'FILL_BLANKS':
                 answers.push({
-                    question: question,
+                    title: question.title,
+                    points: question.points,
+                    description: question.description,
+                    choices: question.choices,
+                    blanks: question.blanks,
+                    questionType: question.questionType,
                     fillBlanksAnswers: question.fillBlanksAnswers
                 })
                 break
             case 'TRUE_FALSE':
                 answers.push({
-                    question: question,
+                    title: question.title,
+                    points: question.points,
+                    description: question.description,
+                    choices: question.choices,
+                    blanks: question.blanks,
+                    questionType: question.questionType,
                     trueFalseAnswer: question.trueFalseAnswer
                 })
                 break
             case 'CHOICE':
                 answers.push({
-                    question: question,
+                    title: question.title,
+                    points: question.points,
+                    description: question.description,
+                    choices: question.choices,
+                    blanks: question.blanks,
+                    questionType: question.questionType,
                     multipleChoiceAnswer: question.multipleChoiceAnswer
                 })
                 break
@@ -48,6 +68,8 @@ function findSubmissions(quizId, studentId) {
 
 function findSubmission(submissionId, studentId) {
     return submissionModel.findOne({_id: submissionId, student: studentId})
+        .populate('quiz')
+        .exec()
 }
 
 module.exports = {

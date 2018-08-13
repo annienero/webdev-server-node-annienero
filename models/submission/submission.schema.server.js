@@ -10,14 +10,22 @@ var submissionSchema = mongoose.Schema({
         ref: 'QuizModel'
     },
     answers: [{
-        question: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'QuestionModel'
+        title: String,
+        points: Number,
+        description: String,
+        choices: [{
+            text: String,
+            choiceValue: String
+        }],
+        blanks: [String],
+        questionType: {
+            type: String,
+            enum: ['ESSAY', 'FILL_BLANKS', 'TRUE_FALSE', 'CHOICE']
         },
-        fillBlanksAnswers: {variable: String, choiceValue: String},
-        multipleChoiceAnswer: String,
         essayAnswer: String,
-        trueFalseAnswer: Boolean
+        fillBlanksAnswers: {variable: String, choiceValue: String},
+        trueFalseAnswer: Boolean,
+        multipleChoiceAnswer: String
     }],
     submissionTime: {type: Date}
 }, {collection: 'submission'})
