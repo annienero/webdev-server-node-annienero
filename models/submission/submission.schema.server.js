@@ -23,7 +23,7 @@ var submissionSchema = mongoose.Schema({
             enum: ['ESSAY', 'FILL_BLANKS', 'TRUE_FALSE', 'CHOICE']
         },
         essayAnswer: String,
-        fillBlanksAnswers: {variable: String, choiceValue: String},
+        fillBlanksAnswers: Object,
         trueFalseAnswer: Boolean,
         multipleChoiceAnswer: String
     }],
