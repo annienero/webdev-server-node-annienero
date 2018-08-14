@@ -3,9 +3,8 @@ var app = express()
 var bodyParser = require('body-parser')
 var session = require('express-session')
 const mongoose = require('mongoose')
-
+var question = require('./models/question/question.model.server')
 mongoose.connect('mongodb://root123:root123@ds215172.mlab.com:15172/heroku_12hvbf81')
-
 app.use(session({
     maxAge: Date.now() + (30 * 1800000),
     resave: false,
@@ -18,9 +17,12 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://webdev-angular-client-nero.herokuapp.com")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+    res.header("Access-Control-Allow-Origin",
+        "https://webdev-angular-client-nero.herokuapp.com")
+    res.header("Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept")
+    res.header("Access-Control-Allow-Methods",
+        "GET, POST, PUT, DELETE, OPTIONS")
     res.header("Access-Control-Allow-Credentials", "true")
     next()
 })
@@ -29,5 +31,8 @@ var userService = require('./services/user.service.server')
 userService(app)
 var sectionService = require('./services/section.service.server')
 sectionService(app)
-app.listen(process.env.PORT || 3000)
-
+var quizService = require('./services/quiz.service.server')
+quizService(app)
+var submissionService = require('./services/submission.service.server')
+submissionService(app)
+app.listen(process.env.PORT || 3002)
