@@ -84,5 +84,5 @@ function updateCurrentUser(req, res) {
 }
 
 function deleteCurrentUser(req, res) {
-//TODO this should be in merge uh
+    userModel.deleteUser(req.session['currentUser'])
 }
